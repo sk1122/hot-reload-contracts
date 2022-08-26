@@ -8,12 +8,14 @@
 	"dependencies": {
 		"@rainbow-me/rainbowkit": "^0.4.5",
 		"ethers": "^5.6.9",
+		"hardhat": "^2.10.1",
 		"next": "latest",
 		"react": "18.1.0",
 		"react-dom": "18.1.0",
 		"wagmi": "^0.6.1"
 	},
 	"devDependencies": {
+		"@sentry/nextjs": "^7.9.0",
 		"@types/node": "17.0.35",
 		"@types/react": "18.0.9",
 		"@types/react-dom": "18.0.5",
