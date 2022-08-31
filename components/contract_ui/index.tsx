@@ -13,12 +13,12 @@ interface IProps {
 const ContractUI = ({ setContract }: IProps) => {
 	const contracts: ContractType[] = [
 		{
-			address: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
+			address: "0x925e9A45C2B576D6AE81d0C4fD57241c7B7364Ed",
 			name: "Index.sol",
 			abi: abi,
 		},
 		{
-			address: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
+			address: "0xf83bc109f36e766ce369f81c807c33bec4120270",
 			name: "Main.sol",
 			abi: abi,
 		},

@@ -64,7 +64,10 @@ const Contract = ({ contract_name, address, abi }: IProps) => {
 		const functions = [];
 		for (let i = 0; i < abi.length; i++) {
 			if (abi[i].type === "function") {
-				functions.push(abi[i]);
+				functions.push({
+					results: undefined,
+					...abi[i]
+				});
 			}
 		}
 
@@ -74,19 +77,46 @@ const Contract = ({ contract_name, address, abi }: IProps) => {
 	const parse_constructor_from_abi = (abi: any) => {
 		for (let i = 0; i < abi.length; i++) {
 			if (abi[i].type === "constructor") {
-				return abi[i];
+				return {
+					results: undefined,
+					...abi[i]
+				};
 			}
 		}
 	};
 
-	const execute_function = (function_name: string, input_list: string[]) => {
+	const execute_function = async (function_name: string, input_list: string[], function_index: number) => {
 		const values = inputs[function_name];
 
-		const value_list = [];
+		const value_list: any[] = [];
 
 		for (let i = 0; i < input_list.length; i++) {
 			value_list.push(values[input_list[i]]);
 		}
+		// console.log("value list -> ", value_list)
+
+		const result = await evmContract[function_name](...value_list)
+
+		let func: any = functions[function_index]
+
+		if(func.outputs.length === 1) {
+			// console.log("11")
+			func.outputs[0]['result'] = result
+		} else if (func.outputs.length > 1) {
+			func = func.outputs.map((output: any, idx: number) => {
+				return output['result'] = result[idx]
+			})
+		} else {
+			return
+		}
+
+		setFunctions((value: any) => {
+			let f = [...value]
+
+			f[function_index] = func
+
+			return f
+		})
 	};
 
 	useEffect(() => {

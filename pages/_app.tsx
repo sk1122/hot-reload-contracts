@@ -16,7 +16,7 @@ import { useEffect } from "react";
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const { chains, provider } = configureChains(
-		[chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
+		[chain.mainnet, chain.polygon, chain.polygonMumbai, chain.optimism, chain.arbitrum],
 		[publicProvider()]
 	);
 
